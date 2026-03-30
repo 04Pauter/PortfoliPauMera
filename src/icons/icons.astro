@@ -1,0 +1,12 @@
+---
+// components/SocialIcon.astro
+// Paràmetres:
+// - link: URL a on apunta l'icona
+// - name: nom de l'icona (per a alt text i accessibilitat)
+// - svg: codi SVG de l'icona
+const { link, name, svg } = Astro.props;
+---
+<a href={link} target="_blank" rel="noopener noreferrer" aria-label={name}>
+  <!-- Inserim l'SVG passat com a paràmetre -->
+  <span class="h-7 w-7 cursor-pointer hover:text-[#7836cf]" >{svg}</span>
+</a>

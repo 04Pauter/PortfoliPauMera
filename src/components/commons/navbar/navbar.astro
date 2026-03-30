@@ -1,0 +1,154 @@
+---
+const links = [
+  { name: "Inici", href: "/" },
+  /*{ name: "Proyectos", href: "/proyectos" },
+  { name: "Sobre Mi", href: "/about" },
+  { name: "Contacto", href: "/contact" }, */
+];
+import Socialicons from "../../socialicons/socialicons.vue";
+import SocialIcons from "../../socialicons/socialicons.vue"
+---
+
+<div class="relative">
+  <!-- Input control -->
+  <input id="menu-toggle" type="checkbox" class="peer hidden md:hidden" />
+
+  <!-- Navbar -->
+  <nav class="fixed top-0 left-0 w-full z-50 bg-gray-950/20 backdrop-blur-md border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      
+      <!-- Logo -->
+      <a href="/" class="flex items-center">
+        <h3 class="text-[#69c7c7] text-3xl font-bold drop-shadow-[1.5px_1.5px_0_#7836cf]">
+          PMP
+        </h3>
+      </a>
+
+      <!-- Desktop Links -->
+      <ul id="navbar-links" class="hidden md:flex items-center space-x-8">
+        {
+          links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="nav-link font-bold transition-colors duration-300 text-white hover:text-[#7d2dac]"
+              >
+                {link.name}
+              </a>
+            </li>
+          ))
+        }
+
+        <SocialIcons client:visible />
+      </ul>
+
+      <!-- Mobile button -->
+      <div class="flex md:hidden items-center gap-4 z-50">
+        <label for="menu-toggle" class="cursor-pointer">
+          
+          <!-- Icona menú -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-7 w-7 text-white peer-checked:hidden"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+
+          <!-- Icona tancar -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-7 w-7 text-white hidden peer-checked:block"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+
+        </label>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Overlay -->
+  <label
+    for="menu-toggle"
+    class="fixed inset-0 bg-black/60 hidden peer-checked:block z-40 md:hidden cursor-pointer"
+  ></label>
+
+  <!-- Sidebar mòbil -->
+  <div
+    class="fixed top-0 right-0 h-full w-64 bg-gray-900 shadow-lg transform translate-x-full transition-transform duration-300 peer-checked:translate-x-0 z-50 md:hidden"
+  >
+    <div class="flex justify-end p-4">
+      <label for="menu-toggle" class="cursor-pointer">
+        <!-- Pots posar aquí un SVG addicional si vols -->
+      </label>
+    </div>
+
+    <ul id="navbar-links-mobile" class="flex flex-col space-y-6 mt-6 ml-6">
+      {
+        links.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class="nav-link-mobile text-lg font-bold text-white hover:text-[#69c7c7] transition-colors duration-300"
+            >
+              {link.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>
+
+<script>
+  (function () {
+    function markActiveLinks() {
+      const currentPath = window.location.pathname.replace(/\/$/, "") || "/";
+      const desktopLinks = Array.from(
+        document.querySelectorAll("#navbar-links .nav-link")
+      );
+      const mobileLinks = Array.from(
+        document.querySelectorAll("#navbar-links-mobile .nav-link-mobile")
+      );
+
+      const allLinks = [...desktopLinks, ...mobileLinks];
+
+      allLinks.forEach((link) => {
+        const hrefAttr = link.getAttribute("href");
+        const href = hrefAttr?.replace(/\/$/, "") || "" || "/";
+
+        if (href === currentPath) {
+          link.classList.add("text-[#7d2dac]", "font-extrabold");
+          link.classList.remove("text-white");
+        } else {
+          link.classList.remove("text-[#7d2dac]", "font-extrabold");
+          if (!link.classList.contains("hover:text-[#7d2dac]")) {
+            link.classList.add("text-white");
+          }
+        }
+      });
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", markActiveLinks);
+    } else {
+      markActiveLinks();
+    }
+
+    window.addEventListener("popstate", markActiveLinks);
+    document.addEventListener("astro:page-load", markActiveLinks);
+    document.addEventListener("astro:after-swap", markActiveLinks);
+    window.addEventListener("load", () => setTimeout(markActiveLinks, 50));
+  })();
+</script>

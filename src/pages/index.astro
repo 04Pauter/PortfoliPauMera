@@ -1,0 +1,21 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/home/header/header.astro";
+import Slider from "../components/home/header/slider.astro";
+
+import AboutHome from "../components/aboutHome/aboutHome.astro"; 
+import HomeProyect from "../components/project/homeProyect.astro";
+
+import FAQS from "../components/home/faqs/FAQS.vue"
+
+import Banner from "../components/commons/banners/banner.astro";
+---
+
+<Layout>
+  <Header />
+  <Slider />
+  <AboutHome />
+  <HomeProyect />
+  <FAQS client:visible />
+  <Banner />
+</Layout>
