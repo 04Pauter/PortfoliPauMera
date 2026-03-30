@@ -10,7 +10,7 @@ import vue from '@astrojs/vue';
 
 export default defineConfig({
   site: 'https://04pauter.github.io',
-  base: '/PortfoliPauMera',
+  base: '/PortfoliPauMera/',
 
   vite: {
     plugins: [tailwindcss()]
