@@ -1,7 +1,7 @@
 <template>
   <div class="my-5 flex items-center justify-center">
     <a
-      href="https://www.linkedin.com/in/lautaro-rodr%C3%ADguez-collins-40505624a/"
+      href="https://www.linkedin.com/in/pau-mera-1629973b4/"
       target="_blank"
       rel="noopener noreferrer"
       class="mr-3 text-zinc-400 hover:text-[#69c7c7] drop-shadow-[1px_1px_0_#7836cf]"
@@ -11,7 +11,7 @@
     </a>
 
     <a
-      href="https://github.com/Lautaro-R-collins"
+      href="https://github.com/04Pauter"
       target="_blank"
       rel="noopener noreferrer"
       class="mx-3 text-zinc-400 hover:text-[#69c7c7] drop-shadow-[1px_1px_0_#7836cf]"
